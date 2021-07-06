@@ -10,9 +10,11 @@ interface ISearchResultsProps {
 }
 
 const SearchResults: React.FC<ISearchResultsProps> = ({ results }: ISearchResultsProps) => {
-  const totalPrice = useMemo(() => results.reduce((total, product) => {
-    return total + product.price;
-  }, 0), [results]);
+  const totalPrice = useMemo(() => {
+    return results.reduce((total, product) => {
+      return total + product.price;
+    }, 0);
+  }, [results]);
   
   return (
     <div>
