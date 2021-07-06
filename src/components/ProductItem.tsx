@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface IProductItemProps {
   product: {
@@ -8,6 +8,8 @@ interface IProductItemProps {
   }
 }
 
+// shallow compare -> comparação rasa
+
 const ProductItem: React.FC<IProductItemProps> = ({ product }: IProductItemProps) => {
   return (
     <div>
@@ -16,4 +18,6 @@ const ProductItem: React.FC<IProductItemProps> = ({ product }: IProductItemProps
   );
 }
 
-export default ProductItem;
+export default memo(ProductItem, (prevProps, nextProps) => {
+  return Object.is(prevProps.product, nextProps.product);
+});

@@ -14,7 +14,7 @@ const SearchResults: React.FC<ISearchResultsProps> = ({ results }: ISearchResult
     <div>
       {results.map(product => {
         return (
-          <ProductItem product={product} />
+          <ProductItem key={product.id} product={product} />
         );
       })}
     </div>
