@@ -6,14 +6,16 @@ interface IProductItemProps {
     price: number;
     title: string;
   }
+  onAddToWishlist: (id: number) => void;
 }
 
 // shallow compare -> comparação rasa
 
-const ProductItem: React.FC<IProductItemProps> = ({ product }: IProductItemProps) => {
+const ProductItem: React.FC<IProductItemProps> = ({ product, onAddToWishlist }: IProductItemProps) => {
   return (
     <div>
       {product.title} - <strong>{product.price}</strong>
+      <button onClick={() => onAddToWishlist(product.id)}>Add to wishlist</button>
     </div>
   );
 }

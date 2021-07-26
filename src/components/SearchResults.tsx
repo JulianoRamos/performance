@@ -7,9 +7,10 @@ interface ISearchResultsProps {
     price: number;
     title: string;
   }>
+  onAddToWishlist: (id: number) => void;
 }
 
-const SearchResults: React.FC<ISearchResultsProps> = ({ results }: ISearchResultsProps) => {
+const SearchResults: React.FC<ISearchResultsProps> = ({ results, onAddToWishlist }: ISearchResultsProps) => {
   const totalPrice = useMemo(() => {
     return results.reduce((total, product) => {
       return total + product.price;
@@ -22,7 +23,7 @@ const SearchResults: React.FC<ISearchResultsProps> = ({ results }: ISearchResult
 
       {results.map(product => {
         return (
-          <ProductItem key={product.id} product={product} />
+          <ProductItem key={product.id} product={product} onAddToWishlist={onAddToWishlist} />
         );
       })}
     </div>
