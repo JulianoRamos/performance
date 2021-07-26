@@ -4,6 +4,7 @@ interface IProductItemProps {
   product: {
     id: number;
     price: number;
+    priceFormatted: string;
     title: string;
   }
   onAddToWishlist: (id: number) => void;
@@ -14,7 +15,7 @@ interface IProductItemProps {
 const ProductItem: React.FC<IProductItemProps> = ({ product, onAddToWishlist }: IProductItemProps) => {
   return (
     <div>
-      {product.title} - <strong>{product.price}</strong>
+      {product.title} - <strong>{product.priceFormatted}</strong>
       <button onClick={() => onAddToWishlist(product.id)}>Add to wishlist</button>
     </div>
   );
