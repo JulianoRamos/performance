@@ -1,4 +1,6 @@
-import React, { memo } from 'react';
+import React, { memo, useState, lazy, Suspense } from 'react';
+
+const AddProductToWishlist = lazy(() => import('./AddProductToWishlist'))
 
 interface IProductItemProps {
   product: {
@@ -13,10 +15,21 @@ interface IProductItemProps {
 // shallow compare -> comparação rasa
 
 const ProductItem: React.FC<IProductItemProps> = ({ product, onAddToWishlist }: IProductItemProps) => {
+  const [isAddingToWishlist, setIsAddingToWishlist] = useState(false)
+  
   return (
     <div>
       {product.title} - <strong>{product.priceFormatted}</strong>
-      <button onClick={() => onAddToWishlist(product.id)}>Add to wishlist</button>
+      <button onClick={() => setIsAddingToWishlist(true)}>Adicionar aos favoritos</button>
+
+      {isAddingToWishlist && 
+        <Suspense fallback={<div>Loading...</div>}>
+          <AddProductToWishlist 
+            onAddToWishlist={() => onAddToWishlist(product.id)} 
+            onRequestClose={() => setIsAddingToWishlist(false)} 
+          />
+        </Suspense>
+      }
     </div>
   );
 }
